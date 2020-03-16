@@ -5,8 +5,8 @@ import Sushi from '../components/Sushi'
 const SushiContainer = (props) => {
 
   let index = props.index
-  let first = index + props.sushis.length % props.sushis.length
-  let last = index + 4 + props.sushis.length % props.sushis.length
+  let first = index
+  let last = (index + 4 > props.sushis.length - 1 ) ? props.sushis.length  : index + 4
 
   return (
     <Fragment>

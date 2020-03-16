@@ -19,6 +19,8 @@ class App extends Component {
   }
 
   showMore = () => {
+    (this.state.sushiIndex >= this.state.sushis.length - 4) ? 
+    this.setState({sushiIndex: 0}) :
     this.setState({sushiIndex: this.state.sushiIndex + 4})
   }
 
@@ -28,7 +30,9 @@ class App extends Component {
 
   eatSushi = (sushi) =>{
     if(this.state.money >= sushi.price){
+      if(!this.state.eaten.includes(sushi)){
       this.setState({eaten: [...this.state.eaten, sushi], money: this.state.money - sushi.price})
+      }
     }
   }
 
