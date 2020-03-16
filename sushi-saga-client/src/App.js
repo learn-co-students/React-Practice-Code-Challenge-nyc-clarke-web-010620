@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SushiContainer from './containers/SushiContainer';
 import Table from './containers/Table';
+import Wallet from './components/Wallet';
 
 // Endpoint!
 
@@ -13,7 +14,8 @@ class App extends Component {
     sushis: [],
     eaten: [],
     sushiIndex:0, 
-    money: 100
+    money: 100,
+    form: 0
   }
 
   showMore = () => {
@@ -30,11 +32,21 @@ class App extends Component {
     }
   }
 
+  addMoney = (e) => {
+    e.preventDefault()
+    this.setState({money: this.state.money + this.state.form})
+  }
+
+  handleOnChange = (e) => {
+    this.setState({form: parseInt(e.target.value)})
+  }
+
   render() {
     return (
       <div className="app">
         <SushiContainer sushis={this.state.sushis} index={this.state.sushiIndex} showMore={this.showMore} eatSushi={this.eatSushi} eaten={this.state.eaten}/>
         <Table money={this.state.money} eaten={this.state.eaten}/>
+        <Wallet addMoney={this.addMoney} handleOnChange={this.handleOnChange} form={this.state.form}/>
       </div>
     );
   }
