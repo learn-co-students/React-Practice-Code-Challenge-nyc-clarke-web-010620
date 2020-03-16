@@ -5,15 +5,16 @@ import Sushi from '../components/Sushi'
 const SushiContainer = (props) => {
 
   let index = props.index
-  let range = 
+  let first = index
+  let last = index + 4
 
   return (
     <Fragment>
       <div className="belt">
         {
-          props.sushis[props.index].map(sushi => <Sushi sushi={sushi}/>)
+          props.sushis.slice(first, last).map(sushi => <Sushi sushi={sushi} eatSushi={props.eatSushi} eaten={props.eaten}/>)
         }
-        <MoreButton />
+        <MoreButton showMore={props.showMore}/>
       </div>
     </Fragment>
   )
