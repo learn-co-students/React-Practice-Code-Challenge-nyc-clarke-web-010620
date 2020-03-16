@@ -6,8 +6,8 @@ const SushiContainer = (props) => (
     <Fragment>
       <div className="belt">
      {/* {console.dir(props.sushis.sushis)} */}
-      {props.sushis.sushis.map(sushi => <Sushi id={sushi.id} key={sushi.id} name={sushi.name} img_url={sushi.img_url} price={sushi.price} />)}
-        <MoreButton />
+      {props.sushis.map(sushi => <Sushi sushi={sushi} key={sushi.id} eat={props.eat} taken={props.eaten.includes(sushi)}/>)}
+        <MoreButton more={props.more}/>
       </div>
     </Fragment>
   )
