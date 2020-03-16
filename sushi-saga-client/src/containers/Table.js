@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react'
+import Sushi from '../components/Sushi'
 
 const Table = (props) => {
 
   const renderPlates = (array) => {
-    return array.map((x, index) => {
-      return <div className="empty-plate" style={{ top: -7 * index }}/>
+    return array.map((sushi, index) => {
+      if (sushi.isEaten) {
+        return <div className="empty-plate" style={{ top: -7 * index }}/>
+      }
     })
   }
 
@@ -21,7 +24,7 @@ const Table = (props) => {
                and renders an empty plate
                for every element in the array
             */
-            renderPlates([])
+            renderPlates(props.sushies)
           }
         </div>
       </div>
