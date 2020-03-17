@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const MoreButton = (props) => {
-    return <button onClick={null}>
+    return <button onClick={props.nextPage}>
         
           </button>
 }

@@ -5,36 +5,49 @@ import Table from './containers/Table';
 // Endpoint!
 const API = "http://localhost:3000/sushis" 
 
-
+// onclick image of sushi. we add the sushi to eaten array. just id 
 
 class App extends Component {
 
   state = {
-    sushies: []
+    sushis: [],
+    eaten: [],
+    money: 100
   }
 
-  eatSushi = (event) => {
-    // id will be event.target.id using findIndex
-    let sushiesCopy = [... this.state.sushies]
-    let sushiIndx = sushiesCopy.findIndex(sushi => sushi.id == event.target.id )
-    sushiesCopy[sushiIndx].isEaten = true 
-    // debugger
-    this.setState({sushies: sushiesCopy})
+  eatSushi = (sushi) => {
+    let newBalance
+    if (this.state.money >= sushi.price){
+    newBalance = this.state.money - sushi.price
+    let eatenCopy = [...this.state.eaten, sushi.id]
+    this.setState({
+     eaten: eatenCopy,
+     money: newBalance   
+    })
+  } else {
+    alert('noway')
+  }
+  
   }
 
   componentDidMount(prevState, prevProps) {
     fetch(API)
     .then(resp => resp.json())
-    .then(data => data.map(obj=> Object.assign({}, obj, {isEaten: false})))
-    .then(data => this.setState({sushies: data}))
+    .then(data => this.setState({sushis: data}))
   }
 
+ 
+
+  
+  
+
   render() {
-console.log(this.state.sushies)
+    
+    
     return (
       <div className="app">
-        <SushiContainer sushies={this.state.sushies} eatSushi={this.eatSushi}/>
-        <Table sushies={this.state.sushies}/>
+        <SushiContainer sushis={this.state.sushis} eatSushi={this.eatSushi} eaten={this.state.eaten}/>
+        <Table eaten={this.state.eaten} money={this.state.money}/>
       </div>
     );
   }
